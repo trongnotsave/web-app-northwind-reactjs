@@ -1,13 +1,14 @@
 import React from "react";
 import CRUD from "../services/crud";
 
-function TableContent(props) {
+function TableContent({ items, onDeleteSuccess }) {
+  // === props.checkUpdateSuccess
   function handleOnDelete(id) {
     //Handle when click button Delete
     CRUD.deleteOne(id).then((res) => {
       // Call CURD from services
-      alert(res.data.message);
-      window.location.reload(); //reload page after delete
+      // check response message
+      onDeleteSuccess(true);
     });
   }
 
@@ -25,7 +26,7 @@ function TableContent(props) {
         <th>Delete</th>
         <th>Edit</th>
       </tr>
-      {props.items.map((
+      {items.map((
         item,
         index //Map responses list data to table row
       ) => (

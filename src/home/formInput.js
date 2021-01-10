@@ -1,7 +1,9 @@
 import React from "react";
 import CRUD from "../services/crud";
 
-function FormInput(props) {
+function FormInput({ onSubmitSuccess }) {
+  // onSubmitSuccess => onUpdateSuccess
+  // Syntax js, defind {abc: "text", def: 12} => object (properties: abc, def)
   const [postData, setPostData] = React.useState({
     //Create postData state
     customer_name: "",
@@ -12,26 +14,18 @@ function FormInput(props) {
     country: "VN",
   });
 
-  function handleChangeCustomerName(e) {
-    e.preventDefault();
-    setPostData({ ...postData, customer_name: e.target.value }); //Only change customer name in postData
-  }
-  function handleChangeContactName(e) {
-    e.preventDefault();
-    setPostData({ ...postData, contact_name: e.target.value }); //Only change contact name in postData
-  }
-  function handleChangeAddress(e) {
-    e.preventDefault();
-    setPostData({ ...postData, address: e.target.value }); //Only change address in postData
+  function handleChangeData(e) {
+    setPostData({ ...postData, [e.target.name]: e.target.value }); //Only change customer name in postData
   }
 
   function handleOnClickSubmit(e) {
     // Handle event when click submit button
-    e.preventDefault();
     CRUD.create(postData)
       .then((res) => {
-        //console.log("Response: " + JSON.stringify(res));
-        alert(res.data.message);
+        // set State check update success => true
+        const check = res.data.message === "Insert successfully";
+        console.log("Check: " + check);
+        onSubmitSuccess(check); // re-render if check is true
       })
       .catch((err) => {
         alert(err.data.message || "Unknown Message"); // alert error messages
@@ -39,34 +33,38 @@ function FormInput(props) {
     console.log("CustomerName : " + JSON.stringify(postData));
   }
 
+  function handleOnSubmit(e) {
+    e.preventDefault(); // prevent reload page if submit
+  }
+
   return (
-    <form>
+    <form onSubmit={handleOnSubmit}>
       <input
         type="text"
-        name="customerID"
-        value={postData.customer_name}
-        onChange={handleChangeCustomerName}
+        name="customer_id"
+        value={postData.customer_id}
+        onChange={handleChangeData}
         placeholder="ID"
       />
       <input
         type="text"
-        name="customerName"
+        name="customer_name"
         value={postData.customer_name}
-        onChange={handleChangeCustomerName}
+        onChange={handleChangeData}
         placeholder="Customer Name"
       />
       <input
         type="text"
-        name="contactName"
+        name="contact_name"
         value={postData.contact_name}
-        onChange={handleChangeContactName}
+        onChange={handleChangeData}
         placeholder="Contact Name"
       />
       <input
         type="text"
         name="address"
         value={postData.address}
-        onChange={handleChangeAddress}
+        onChange={handleChangeData}
         placeholder="Address"
       />
       <input type="text" name="city" value="this is city" />

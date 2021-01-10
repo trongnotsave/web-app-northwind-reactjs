@@ -1,7 +1,7 @@
 import HttpRequest from "./http-common";
 
 const getAll = async () => {
-  return await HttpRequest.get("http://localhost:5000/customer/all");
+  return await HttpRequest.get("http://127.0.0.1:5000/customer/all");
 };
 
 const create = (data) => {
