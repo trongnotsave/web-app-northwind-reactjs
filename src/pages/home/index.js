@@ -1,7 +1,7 @@
-import CRUD from "../services/crud";
+import CRUD from "services/crud";
 import React from "react";
 import TableContent from "./tableContent";
-import FormInput from "./formInput";
+import FormInput from "components/formInput";
 
 function Home() {
   // Dùng duy nhất cho React Hooks FUNCTION COMPONENT. KHÔNG ĐƯỢC DÙNG REACT CLASS COMPONENT
@@ -33,7 +33,7 @@ function Home() {
     // Short hand React.Fragment
     <>
       <TableContent items={listCustomers} onDeleteSuccess={onUpdateSuccess} />
-      <FormInput onSubmitSuccess={onUpdateSuccess} />
+      <FormInput onSubmitSuccess={onUpdateSuccess} type="create" />
     </>
   );
 }

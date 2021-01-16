@@ -1,7 +1,10 @@
 import React from "react";
-import CRUD from "../services/crud";
+import CRUD from "services/crud";
+import { useHistory } from "react-router-dom";
 
 function TableContent({ items, onDeleteSuccess }) {
+  let history = useHistory();
+
   // === props.checkUpdateSuccess
   function handleOnDelete(id) {
     //Handle when click button Delete
@@ -12,7 +15,11 @@ function TableContent({ items, onDeleteSuccess }) {
     });
   }
 
-  function handleOnEdit() {}
+  function handleOnEdit(item) {
+    // Route sang UpdatePage
+    history.push(`/customers/update/${item.customer_id}`, { updateItem: item });
+  }
+
   return (
     <table>
       <tr>

@@ -1,8 +1,21 @@
-import logo from "./logo.svg"; // => ES6. Cũ => require('./logo.svg')
 import "./App.css";
-import Home from "./home";
+import Home from "./pages/home";
+import UpdatePage from "./pages/update";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
 function App() {
-  return <Home />;
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/customers" exact>
+          <Home />
+        </Route>
+        <Route path="/customers/update/:id">
+          <UpdatePage />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
