@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import CRUD from "services/crud";
 import { useHistory } from "react-router-dom";
+import { Form, FormGroup, Button, Input, Label } from "reactstrap";
 
 function FormInput({ onSubmitSuccess, type, updateID, updateItem }) {
   let history = useHistory();
@@ -65,35 +66,53 @@ function FormInput({ onSubmitSuccess, type, updateID, updateItem }) {
   }
 
   return (
-    <form onSubmit={handleOnSubmit}>
-      <input
-        type="text"
-        name="customer_name"
-        value={postData.customer_name}
-        onChange={handleChangeData}
-        placeholder="Customer Name"
-      />
-      <input
-        type="text"
-        name="contact_name"
-        value={postData.contact_name}
-        onChange={handleChangeData}
-        placeholder="Contact Name"
-      />
-      <input
-        type="text"
-        name="address"
-        value={postData.address}
-        onChange={handleChangeData}
-        placeholder="Address"
-      />
-      <input type="text" name="city" value="this is city" />
-      <input type="text" name="postalCode" value="this is postalCode" />
-      <input type="text" name="country" value="this is country" />
-      <button name="btnSubmit" value="Submit" onClick={handleOnClickSubmit}>
-        Submit{" "}
-      </button>
-    </form>
+    <Form onSubmit={handleOnSubmit}>
+      <FormGroup>
+        <Label for="customerName">Customer Name</Label>
+        <Input
+          type="text"
+          name="customer_name"
+          value={postData.customer_name}
+          onChange={handleChangeData}
+          placeholder="Customer Name"
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label for="contactName">Contact Name</Label>
+        <Input
+          type="text"
+          name="contact_name"
+          value={postData.contact_name}
+          onChange={handleChangeData}
+          placeholder="Contact Name"
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label for="_address">Address</Label>
+        <Input
+          type="text"
+          name="address"
+          value={postData.address}
+          onChange={handleChangeData}
+          placeholder="Address"
+          id=""
+        />
+      </FormGroup>
+
+      <input type="text" name="city" value="this is city" hidden />
+      <input type="text" name="postalCode" value="this is postalCode" hidden />
+      <input type="text" name="country" value="this is country" hidden />
+      <div className="text-center">
+        <Button
+          name="btnSubmit"
+          value="Submit"
+          onClick={handleOnClickSubmit}
+          color="primary"
+        >
+          Submit{" "}
+        </Button>
+      </div>
+    </Form>
   );
 }
 export default FormInput;

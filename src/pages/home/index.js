@@ -2,6 +2,7 @@ import CRUD from "services/crud";
 import React from "react";
 import TableContent from "./tableContent";
 import FormInput from "components/formInput";
+import { Container, Row, Col } from "reactstrap";
 
 function Home() {
   // Dùng duy nhất cho React Hooks FUNCTION COMPONENT. KHÔNG ĐƯỢC DÙNG REACT CLASS COMPONENT
@@ -31,10 +32,21 @@ function Home() {
 
   return (
     // Short hand React.Fragment
-    <>
-      <TableContent items={listCustomers} onDeleteSuccess={onUpdateSuccess} />
-      <FormInput onSubmitSuccess={onUpdateSuccess} type="create" />
-    </>
+    <Container fluid={true}>
+      <h2 className="text-center">Northwind React Example</h2>
+      <Row>
+        <Col xs="8">
+          <TableContent
+            items={listCustomers}
+            onDeleteSuccess={onUpdateSuccess}
+          />
+        </Col>
+        <Col xs="4">
+          <h3 className="text-center">Create Customer</h3>
+          <FormInput onSubmitSuccess={onUpdateSuccess} type="create" />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 export default Home;
